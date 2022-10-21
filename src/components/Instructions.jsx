@@ -231,7 +231,7 @@ const Instructions = () => {
   };
 
   const parseDate = dateString => {
-    const date = moment(dateString);
+    const date = moment(dateString, 'DD.MM.YYYY');
     return date.isValid() ? date.format('DD.MM.YYYY') : '-';
   };
 

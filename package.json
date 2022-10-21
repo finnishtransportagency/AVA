@@ -22,13 +22,13 @@
     "react-router-breadcrumbs-hoc": "^4.0.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.0",
-    "web-vitals": "^0.2.4"
+    "web-vitals": "^0.2.4",
+    "yarn": "^1.22.19"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build:dev": "REACT_APP_INST_URL=\"https://devapi.testivaylapilvi.fi/ava/ohjeluettelo\" REACT_APP_S3_OHJEET_ENDPOINT=\"https://d3dqafoph52mqj.cloudfront.net/ava/Ohjeluettelo/\" REACT_APP_FOLDERS_URL=\"https://devapi.testivaylapilvi.fi/ava/hakemisto/\" react-scripts build",
-    "build:test": "REACT_APP_INST_URL=\"https://api.testivaylapilvi.fi/ava/ohjeluettelo\" REACT_APP_S3_OHJEET_ENDPOINT=\"https://ava.testivaylapilvi.fi/ava/Ohjeluettelo/\" REACT_APP_FOLDERS_URL=\"https://api.testivaylapilvi.fi/ava/hakemisto/\" react-scripts build",
-    "build:prod": "REACT_APP_INST_URL=\"https://api.vaylapilvi.fi/ava/ohjeluettelo\" REACT_APP_S3_OHJEET_ENDPOINT=\"https://ava.vaylapilvi.fi/ava/Ohjeluettelo/\" REACT_APP_FOLDERS_URL=\"https://api.vaylapilvi.fi/ava/hakemisto/\" react-scripts build",
+    "start": "REACT_APP_INST_URL=\"https://d10w6jz63d.execute-api.eu-west-1.amazonaws.com/aws/ava/ohjeluettelo\" REACT_APP_S3_OHJEET_ENDPOINT=\"https://d3m7mj419hulgb.cloudfront.net/ava/Ohjeluettelo/\" REACT_APP_FOLDERS_URL=\"https://yp3raonv5l.execute-api.eu-west-1.amazonaws.com/aws/ava/hakemisto/\" react-scripts start",
+    "build:test": "REACT_APP_INST_URL=\"https://apiavatest.testivaylapilvi.fi/ava/ohjeluettelo\" REACT_APP_S3_OHJEET_ENDPOINT=\"https://avatest.testivaylapilvi.fi/ava/Ohjeluettelo/\" REACT_APP_FOLDERS_URL=\"https://apiavatest.testivaylapilvi.fi/ava/hakemisto/\" react-scripts build",
+    "build:prod": "REACT_APP_INST_URL=\"https://apiava.vaylapilvi.fi/ava/ohjeluettelo\" REACT_APP_S3_OHJEET_ENDPOINT=\"https://ava.vaylapilvi.fi/ava/Ohjeluettelo/\" REACT_APP_FOLDERS_URL=\"https://apiava.vaylapilvi.fi/ava/hakemisto/\" react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
