@@ -9,6 +9,8 @@ on:
 
 jobs:
   build:
+    env:
+      CI: true // jest needs this
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -21,3 +23,12 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: Install dependencies
       run: yarn install
+      
+    - name: Run tests
+      run: yarn test
+      
+    - uses: actions/upload-artifact@v3
+    - name: Create artifact
+      with:
+        name: ava-release-artifact
+        path: build/*
