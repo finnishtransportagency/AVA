@@ -1,23 +1,53 @@
 # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
 
-name: Node.js CI
+name: AVA - Build and create a release
 
-on:
-  push:
-    branches: [ "master" ]
-
+on: 
+  workflow_dispatch: {}
 jobs:
   build:
+    env:
+      CI: true
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [14.x]
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout
+      uses: actions/checkout@v3
+
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
+
     - name: Install dependencies
       run: yarn install
+
+    - name: Create a release tag
+      run: |
+        echo "RELEASE_TAG=$(git rev-parse --short=8 HEAD)" >> $GITHUB_ENV
+   
+    - name: Is the tag available?
+      run: |
+        echo "${{ env.RELEASE_TAG }}"
+
+    - name: "Create a release"
+      uses: "actions/github-script@v6"
+      with:
+        script: |
+          try {
+            await github.rest.repos.createRelease({
+              draft: false,
+              generate_release_notes: true,
+              name: process.env.RELEASE_TAG,
+              owner: context.repo.owner,
+              prerelease: false,
+              repo: context.repo.repo,
+              tag_name: process.env.RELEASE_TAG,
+              target_commitish: context.ref
+            });
+          } catch (error) {
+            core.setFailed(error.message);
+          }
