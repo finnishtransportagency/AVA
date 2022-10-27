@@ -3,8 +3,10 @@
 
 name: AVA - Build and create a release
 
-on: 
-  workflow_dispatch: {}
+on:
+  push:
+    branches:
+      - 'master'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -25,16 +27,12 @@ jobs:
       run: yarn test  
 
     - name: Create a release tag
-      if: always()
+      if: always() # run this even if tests fail
       run: |
         echo "RELEASE_TAG=$(git rev-parse --short=8 HEAD)" >> $GITHUB_ENV
-   
-    - name: Is the tag available?
-      run: |
-        echo "${{ env.RELEASE_TAG }}"
 
     - name: "Create a release"
-      if: ${{false}}
+      if: always() # run this even if tests fail
       uses: "actions/github-script@v6"
       with:
         script: |
