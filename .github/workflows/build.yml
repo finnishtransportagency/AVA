@@ -3,35 +3,36 @@
 
 name: AVA - Build and create a release
 
-on: 
-  workflow_dispatch: {}
+on:
+  push:
+    branches:
+      - 'master'
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [14.x]
     steps:
     - name: Checkout
       uses: actions/checkout@v3
 
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Setup node.js 
       uses: actions/setup-node@v3
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: '14.x'
+        cache: 'yarn'
 
     - name: Install dependencies
       run: yarn install
 
+    - name: Run tests
+      run: yarn test  
+
     - name: Create a release tag
+      if: always() # run this even if tests fail
       run: |
         echo "RELEASE_TAG=$(git rev-parse --short=8 HEAD)" >> $GITHUB_ENV
-   
-    - name: Is the tag available?
-      run: |
-        echo "${{ env.RELEASE_TAG }}"
 
     - name: "Create a release"
+      if: always() # run this even if tests fail
       uses: "actions/github-script@v6"
       with:
         script: |
