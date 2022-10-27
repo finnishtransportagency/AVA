@@ -43,7 +43,7 @@ jobs:
               repo: context.repo.repo,
             });
             
-            console.log(preRel);
+            console.log(prevRel);
             const prevTag = prevRel.tag_name;
 
             const releaseNotes = await github.rest.repos.generateReleaseNotes({
