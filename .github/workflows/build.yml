@@ -4,7 +4,9 @@
 name: AVA - Build and create a release
 
 on:
-  workflow_dispatch: {}
+  push:
+    branches:
+      - 'feature/AVAPALJU-110-gha'
 jobs:
   build:
     runs-on: ubuntu-latest
