@@ -28,7 +28,6 @@ jobs:
       run: yarn test  
 
     - name: Create a release tag
-      if: ${{false}}
       # if: always() # run this even if tests fail
       run: |
         echo "RELEASE_TAG=$(git rev-parse --short=8 HEAD)" >> $GITHUB_ENV
@@ -51,7 +50,8 @@ jobs:
               previous_tag_name: prevTag
             });
 
-            
+            console.log(releaseNotes);
+
           } catch (error) {
             core.setFailed(error.message);
           }
