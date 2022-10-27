@@ -31,6 +31,31 @@ jobs:
       run: |
         echo "RELEASE_TAG=$(git rev-parse --short=8 HEAD)" >> $GITHUB_ENV
 
+    - name: Check logs of this step to see if this generates better release notes
+      if: always() # run this even if tests fail
+      uses: "actions/github-script@v6"
+      with:
+        script: |
+          try {
+            const prevRel = await github.rest.repos.getLatestRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            });
+         
+            const prevTag = prevRel.data.tag_name;
+            const releaseNotes = await github.rest.repos.generateReleaseNotes({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              tag_name: process.env.RELEASE_TAG,
+              previous_tag_name: prevTag
+            });
+
+            console.log(releaseNotes);
+
+          } catch (error) {
+            core.setFailed(error.message);
+          }
+
     - name: "Create a release"
       if: always() # run this even if tests fail
       uses: "actions/github-script@v6"
