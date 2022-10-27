@@ -42,10 +42,8 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
             });
-            
-            console.log(prevRel);
-            const prevTag = prevRel.tag_name;
-
+         
+            const prevTag = prevRel.data.tag_name;
             const releaseNotes = await github.rest.repos.generateReleaseNotes({
               owner: context.repo.owner,
               repo: context.repo.repo,
