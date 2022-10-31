@@ -33,7 +33,7 @@ jobs:
 
     - name: Create release tag
       if: always() # run this even if tests fail
-    - uses: haya14busa/action-bumpr@v1
+      uses: haya14busa/action-bumpr@v1
       with:
         default_bump_level: patch # will bump patch level if PR has no labels (bump:minor, bump:major)
 
