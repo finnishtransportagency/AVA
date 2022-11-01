@@ -29,7 +29,7 @@ jobs:
     - name: Package
       if: always() # run this even if tests fail
       run: |
-        yarn build:test && zip ava.zip build/
+        yarn build:test && zip -r ava.zip build/
 
     - name: Create release tag
       if: always() # run this even if tests fail
