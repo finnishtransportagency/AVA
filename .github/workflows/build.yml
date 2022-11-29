@@ -1,23 +1,80 @@
 # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
 
-name: Node.js CI
+name: AVA - Build and create a release
 
 on:
   push:
-    branches: [ "master" ]
-
+    branches:
+      - 'master'
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [14.x]
     steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Setup node.js 
       uses: actions/setup-node@v3
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: '14.x'
+        cache: 'yarn'
+
     - name: Install dependencies
       run: yarn install
+
+    - name: Run tests
+      run: yarn test
+
+    - name: Package
+      if: always() # run this even if tests fail
+      run: |
+        yarn build:test && zip -r ava.zip build/
+
+    - name: Create release tag
+      if: always() # run this even if tests fail
+      uses: haya14busa/action-bumpr@v1
+      with:
+        default_bump_level: patch # will bump patch level if PR has no labels (bump:minor, bump:major)
+
+    - name: Get the tag
+      if: always() # run this even if tests fail
+      run: |
+        echo "RELEASE_TAG=$(git tag --points-at HEAD)" >> $GITHUB_ENV
+
+    - name: "Create release"
+      id: release-step
+      if: always() # run this even if tests fail
+      uses: "actions/github-script@v6"
+      with:
+        result-encoding: string
+        script: |
+          try {
+            const result = await github.rest.repos.createRelease({
+              draft: false,
+              generate_release_notes: true,
+              name: process.env.RELEASE_TAG,
+              owner: context.repo.owner,
+              prerelease: false,
+              repo: context.repo.repo,
+              tag_name: process.env.RELEASE_TAG,
+            });
+            
+            console.log(result);
+            return result.data.upload_url.replace("{?name,label}", "?name=ava.zip");
+          } catch (error) {
+            core.setFailed(error.message);
+            return error;
+          }
+
+    - name: Upload release artifact
+      id: upload-release-asset
+      if: always() # run this even if tests fail
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.release-step.outputs.result }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+        asset_path: ./ava.zip
+        asset_name: ava.zip
+        asset_content_type: application/zip
