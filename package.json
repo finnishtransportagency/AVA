@@ -11,6 +11,8 @@
     "ag-grid-react": "^24.1.1",
     "axios": "^0.21.0",
     "core-js": "^3.7.0",
+    "dotenv": "^16.0.3",
+    "dotenv-cli": "^6.0.0",
     "i18next": "^20.3.5",
     "moment": "^2.29.1",
     "node-sass": "^4.14.1",
@@ -26,9 +28,9 @@
     "yarn": "^1.22.19"
   },
   "scripts": {
-    "start": "REACT_APP_INST_URL=\"https://d10w6jz63d.execute-api.eu-west-1.amazonaws.com/aws/ava/ohjeluettelo\" REACT_APP_S3_OHJEET_ENDPOINT=\"https://d3m7mj419hulgb.cloudfront.net/ava/Ohjeluettelo/\" REACT_APP_FOLDERS_URL=\"https://yp3raonv5l.execute-api.eu-west-1.amazonaws.com/aws/ava/hakemisto/\" react-scripts start",
-    "build:test": "REACT_APP_INST_URL=\"https://apiavatest.testivaylapilvi.fi/ava/ohjeluettelo\" REACT_APP_S3_OHJEET_ENDPOINT=\"https://avatest.testivaylapilvi.fi/ava/Ohjeluettelo/\" REACT_APP_FOLDERS_URL=\"https://apiavatest.testivaylapilvi.fi/ava/hakemisto/\" CI=false && react-scripts build",
-    "build:prod": "REACT_APP_INST_URL=\"https://apiava.vaylapilvi.fi/ava/ohjeluettelo\" REACT_APP_S3_OHJEET_ENDPOINT=\"https://ava.vaylapilvi.fi/ava/Ohjeluettelo/\" REACT_APP_FOLDERS_URL=\"https://apiava.vaylapilvi.fi/ava/hakemisto/\" CI=false && react-scripts build",
+    "start": "react-scripts start",
+    "build:test": "dotenv -e .env.test -- react-scripts build",
+    "build:prod": "dotenv -e .env.production -- react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -49,5 +51,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "react-inject-env": "^2.1.0"
   }
 }
