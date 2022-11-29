@@ -63,6 +63,16 @@ const FoldersContainer = () => {
               {t('about_open_data_url')}
             </a>
           </p>
+          <p tabIndex='-1'>
+            {t('about_open_contact_text')}:{' '}
+            <a
+              tabIndex='0'
+              href={`mailto:${t('about_open_contact_email')}`}
+              rel='noreferrer'
+            >
+              {t('about_open_contact_email')}
+            </a>
+          </p>
         </div>
         <Breadcrumb />
       </div>
