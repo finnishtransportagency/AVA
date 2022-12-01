@@ -8,6 +8,7 @@ import { AG_GRID_LOCALE_FI } from '../locale.fi.js';
 import { useParams, withRouter } from 'react-router-dom';
 import { getParentPath, GetBtnNextAriaLabel } from '../helpers';
 import { config } from '../App';
+import ClickableCellRendererDownload from "./ClickableCellRendererDownload";
 
 const CustomLoadingOverlay = () => {
   const { t } = useTranslation();
@@ -158,6 +159,7 @@ const FoldersList = ({ rowData, fetchError, history, location }) => {
             clickableCellRenderer: ClickableCellRenderer,
             clickableCellRendererModified: ClickableCellRendererModified,
             clickableCellRendererSize: ClickableCellRendererSize,            
+            clickableCellRendererDownload: ClickableCellRendererDownload,
             customLoadingOverlay: CustomLoadingOverlay
           }}
           loadingOverlayComponent={'customLoadingOverlay'}
@@ -176,8 +178,8 @@ const FoldersList = ({ rowData, fetchError, history, location }) => {
             sortable={true}
           /> 
           <AgGridColumn
-            flex={300}
-            minWidth={100}
+            flex={200}
+            minWidth={150}
             suppressMovable={false}
             hide={false}
             lockVisible={false}
@@ -188,8 +190,8 @@ const FoldersList = ({ rowData, fetchError, history, location }) => {
             sortable={true}
           />         
           <AgGridColumn            
-            flex={200}
-            minWidth={100}
+            flex={120}
+            minWidth={80}
             suppressMovable={false}
             hide={false}
             lockVisible={false}
@@ -198,6 +200,18 @@ const FoldersList = ({ rowData, fetchError, history, location }) => {
             field='size'
             cellRenderer='clickableCellRendererSize'
             sortable={true}       
+          />
+          <AgGridColumn
+            flex={150}
+            minWidth={100}
+            suppressMovable={false}
+            hide={false}
+            lockVisible={false}
+            lockPinned={false}
+            headerName={t('download_header')}
+            field='download'
+            cellRenderer='clickableCellRendererDownload'
+            sortable={false}
           />
           
         </AgGridReact>
