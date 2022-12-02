@@ -28,6 +28,12 @@ export const Cell = props => {
   return <ClickableCellRenderer {...props} />;
 };
 
+function isInstructionsFolder(props) {
+  return props.data.onkohakemisto &&
+    typeof props.value === 'string' &&
+    props.value.toLowerCase().indexOf('Ohjeluettelo') >= 0;
+}
+
 const ClickableCellRenderer = props => {
   const { folder } = useParams();
   // get URL and retrieve asset from S3
@@ -54,9 +60,9 @@ const ClickableCellRenderer = props => {
       .catch(console.error);
   };
 
-  const GetIcon = () => {
+  const GetIcon = (value) => {
     const { t } = useTranslation();
-    if (props.value === 'BackToParent') {
+    if (value === 'BackToParent') {
       return <i className='fas fa-arrow-left ava-list-icon' role='img' />;
     } else if (props.data.onkohakemisto) {
       return (
@@ -75,29 +81,6 @@ const ClickableCellRenderer = props => {
       />
     );
   };
-
-  const GetBaseIcon = (value) => {
-    const { t } = useTranslation();
-    if (props.value === 'BackToParent') {
-      return <i className='fas fa-arrow-left ava-list-icon' role='img' />;
-    } else if (props.data.onkohakemisto) {
-      return (
-        <i
-          className='fas fa-folder-open ava-list-icon'
-          role='img'
-          aria-label={t('folder')}
-        />
-      );
-    }
-    return (
-      <i
-        className='fas fa-file ava-list-icon'
-        role='img'
-        aria-label={t('file')}
-      />
-    );
-  };
-
 
   const GetLink = () => {
     const { t } = useTranslation();
@@ -106,17 +89,14 @@ const ClickableCellRenderer = props => {
     if (props.value === 'BackToParent') {
       return (
         <Link to={parentPath || '/'} title={t('back')}>
-          {GetIcon()} {t('back')}
+          {GetIcon(props.value)} {t('back')}
         </Link>
       );
-    } else if (
-      typeof props.value === 'string' &&
-      props.value.toLowerCase().indexOf('Ohjeluettelo') >= 0
-    ) {
+    } else if (isInstructionsFolder(props)) {
       // if folder name is 'Ohjeluettelo', navigate to ohjeluettelo
       return (
         <Link to='/ava/Ohjeluettelo' title={props.value}>
-          {GetIcon()}
+          {GetIcon(props.value)}
           {props.value.replace('ava','')}
         </Link>
       );
@@ -129,15 +109,14 @@ const ClickableCellRenderer = props => {
           onClick={fetchFile}
           title={props.value}
         >
-          {GetIcon()}
+          {GetIcon(props.value)}
           {getShortFileNameFromFullPath(props.value.replace('ava','').replace('index.html',''))}
         </span>
-
       );
     }
     return (
       <Link to={`/${props.value.substring(0, props.value.length - 1) || ''}`} title={props.value}>
-        {GetIcon()}
+        {GetIcon(props.value)}
         {getShortFolderNameFromFullPath(props.value.replace('ava',''))}
       </Link>
     );

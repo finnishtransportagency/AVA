@@ -13,7 +13,6 @@ const FoldersContainer = () => {
   const { t } = useTranslation();
   const [title, setTitle] = useState('');
 
-  // TODO refactor title creation to new custom hook
   useEffect(() => {
     fetch(`${config.apiUrlFolders}${folder || config.defaultFolder}/`)
       .then(res => {
