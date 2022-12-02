@@ -1,14 +1,14 @@
 import React, { useRef, useState, useCallback } from 'react';
 import { AgGridColumn, AgGridReact } from 'ag-grid-react';
 import { useTranslation } from 'react-i18next';
-import ClickableCellRenderer from './ClickableCellRenderer';
-import ClickableCellRendererSize from './ClickableCellRendererSize';
-import ClickableCellRendererModified from './ClickableCellRendererModified';
-import { AG_GRID_LOCALE_FI } from '../locale.fi.js';
+import ClickableCellRenderer from '../GridCells/ClickableCellRenderer';
+import ClickableCellRendererSize from '../GridCells/ClickableCellRendererSize';
+import ClickableCellRendererModified from '../GridCells/ClickableCellRendererModified';
+import { AG_GRID_LOCALE_FI } from '../../locale.fi.js';
 import { useParams, withRouter } from 'react-router-dom';
-import { getParentPath, GetBtnNextAriaLabel } from '../helpers';
-import { config } from '../App';
-import ClickableCellRendererDownload from "./ClickableCellRendererDownload";
+import { getParentPath, GetBtnNextAriaLabel } from '../../helpers';
+import { config } from '../../App';
+import ClickableCellRendererDownload from "../GridCells/ClickableCellRendererDownload";
 
 const CustomLoadingOverlay = () => {
   const { t } = useTranslation();
@@ -122,9 +122,9 @@ const FoldersList = ({ rowData, fetchError, history, location }) => {
 
   const getNoRowsOverlay = () => {
     return fetchError
-      ? `<a style="pointer-events: auto !important;" href="/">${localeTextFunc(
-          'errorFetching'
-        )}</a>`
+      ? `<a style="pointer-events: auto !important;" href="/AVA/public">${ localeTextFunc(
+        'errorFetching'
+      ) }</a>`
       : `<span>${localeTextFunc('noRowsToShow')}</span>`;
   };
 
@@ -212,6 +212,7 @@ const FoldersList = ({ rowData, fetchError, history, location }) => {
             field='download'
             cellRenderer='clickableCellRendererDownload'
             sortable={false}
+
           />
           
         </AgGridReact>
@@ -227,11 +228,11 @@ const FoldersList = ({ rowData, fetchError, history, location }) => {
         </button>
       </div>
       <div id="license-rules">
-        <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
+        <a rel="license" href="AVA/src/components/Grid/FoldersList">
           <img src="https://licensebuttons.net/l/by/4.0/88x31.png" alt="Creative Commons License"/>
         </a>
         <span className="license-rules">
-        {t('license_prefix')} <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">{t('license_postfix')}</a>
+        {t('license_prefix')} <a rel="license" href="AVA/src/components/Grid/FoldersList">{t('license_postfix')}</a>
         </span>
       </div>
     </div>

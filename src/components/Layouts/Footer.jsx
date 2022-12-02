@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import i18n from 'i18next';
-import logo from '../img/vayla_alla_fi_sv_rgb.png';
-import logo_en from '../img/vaylavirasto-logo_en_rgb.png';
+import logo from '../../img/vayla_alla_fi_sv_rgb.png';
+import logo_en from '../../img/vaylavirasto-logo_en_rgb.png';
 
 const Footer = () => {
   const scrollTop = useRef(null);
@@ -48,7 +48,7 @@ const Footer = () => {
             <div className='social-media-links'>
               <a
                 className='footer__description__item footer_description__social__item yja-external-link'
-                href='https://www.facebook.com/vaylafi/'
+                href='AVA/src/components/Layouts/Footer'
                 title='Facebook'
                 target='_blank'
                 rel='noreferrer'

@@ -1,10 +1,10 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { getShortFileNameFromFullPath } from "../service/FileNameService";
-import { getCurrentUrl } from "../service/UrlService";
+import { getShortFileNameFromFullPath } from "../../service/FileNameService";
+import { getCurrentUrl } from "../../service/UrlService";
 import PropTypes from 'prop-types';
-import { useFoldersData } from "../hooks/useFoldersData";
+import { useFoldersData } from "../../hooks/useFoldersData";
 
 function isRootFolderOrBackButton(isFolder, fileName) {
   return isFolder || fileName === 'BackToParent';

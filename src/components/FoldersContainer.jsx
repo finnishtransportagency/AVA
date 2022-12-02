@@ -1,9 +1,9 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { useParams, withRouter } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import FoldersList from './FoldersList';
+import FoldersList from './Grid/FoldersList';
 import { config } from '../App';
-import Header from './Header';
+import Header from './Layouts/Header';
 import Breadcrumb from './Breadcrumb';
 
 const FoldersContainer = () => {
@@ -13,16 +13,8 @@ const FoldersContainer = () => {
   const { t } = useTranslation();
   const [title, setTitle] = useState('');
 
+  // TODO refactor title creation to new custom hook
   useEffect(() => {
-    var title = `${folder ?? t('heading')}`;
-    if(title === 'ava') {
-      title = `${t('heading')}`;
-    }
-    title = title.replace('ava','');
-
-    document.title = title;
-
-    setTitle(title);
     fetch(`${config.apiUrlFolders}${folder || config.defaultFolder}/`)
       .then(res => {
         if (!res.ok) {
@@ -43,6 +35,19 @@ const FoldersContainer = () => {
         setRowData([]);
       });
   }, [folder, t]);
+
+  // TODO refactor title creation to new custom hook
+  useEffect(() => {
+    let title = `${ folder ?? t('heading') }`;
+    if(title === 'ava') {
+      title = `${t('heading')}`;
+    }
+    title = title.replace('ava','');
+
+    document.title = title;
+    setTitle(title);
+  }, [folder, t]);
+
 
   return (
     <Fragment>

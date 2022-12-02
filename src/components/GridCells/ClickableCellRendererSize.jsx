@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import { config } from '../App';
+import { useFoldersData } from "../../hooks/useFoldersData";
 
 const getRightSize = (size) => {
   var sizes = ['B', 'KB', 'MB', 'GB', 'TB'];
@@ -12,27 +12,7 @@ const getRightSize = (size) => {
 }
 
 export const Cell = props => {
-  const [indexHTML, setIndexHTML] = React.useState(null);
-
-  React.useEffect(() => {
-    fetch(`${config.apiUrlFolders}/${props.value}`)
-      .then(res => res.json())
-      .then(data => {
-        const index = data?.aineisto?.find(row =>
-          row.tiedosto.includes('index.html')
-        );
-
-        if (!index) {
-          return;
-        }
-      
-        fetch(`${config.apiUrlFolders}/${index.tiedosto}`)
-          .then(res => res.json())        
-          .then(data => setIndexHTML(data.url))                
-      });
-  }, [indexHTML, props]);
-
-
+  const indexHTML = useFoldersData(props);
 
   if (indexHTML !== null) {
     return (

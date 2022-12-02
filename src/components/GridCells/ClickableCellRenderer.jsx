@@ -1,30 +1,14 @@
 import React from 'react';
 import { withRouter, Link, useParams } from 'react-router-dom';
-import { config } from '../App';
+import { config } from '../../App';
 import { useTranslation } from 'react-i18next';
-import { getParentPath } from '../helpers';
+import { getParentPath } from '../../helpers';
+import { useFoldersData } from "../../hooks/useFoldersData";
+import { getShortFileNameFromFullPath, getShortFolderNameFromFullPath } from "../../service/FileNameService";
 
 export const Cell = props => {
-  const [indexHTML, setIndexHTML] = React.useState(null);
+  const indexHTML = useFoldersData(props);
   const { t } = useTranslation();
-
-  React.useEffect(() => {
-    fetch(`${config.apiUrlFolders}/${props.value}`)
-      .then(res => res.json())
-      .then(data => {
-        const index = data?.aineisto?.find(row =>          
-          row.tiedosto.includes('index.html')
-        );
-        //console.log("data.aineisto:", data.aineisto);
-        if (!index) {
-          return;
-        }
-
-        fetch(`${config.apiUrlFolders}/${index.tiedosto}`)
-          .then(res => res.json())
-          .then(data => setIndexHTML(data.url));
-      });
-  }, [indexHTML, props]);
 
   // check index.htm. Must be under next folder not futher
   //if (indexHTML !== null) {
@@ -92,6 +76,29 @@ const ClickableCellRenderer = props => {
     );
   };
 
+  const GetBaseIcon = (value) => {
+    const { t } = useTranslation();
+    if (props.value === 'BackToParent') {
+      return <i className='fas fa-arrow-left ava-list-icon' role='img' />;
+    } else if (props.data.onkohakemisto) {
+      return (
+        <i
+          className='fas fa-folder-open ava-list-icon'
+          role='img'
+          aria-label={t('folder')}
+        />
+      );
+    }
+    return (
+      <i
+        className='fas fa-file ava-list-icon'
+        role='img'
+        aria-label={t('file')}
+      />
+    );
+  };
+
+
   const GetLink = () => {
     const { t } = useTranslation();
     const parentPath = getParentPath(folder);
@@ -123,17 +130,15 @@ const ClickableCellRenderer = props => {
           title={props.value}
         >
           {GetIcon()}
-          {props.value.replace('ava','').replace('index.html','')}
+          {getShortFileNameFromFullPath(props.value.replace('ava','').replace('index.html',''))}
         </span>
-        
-        
-        
+
       );
     }
     return (
       <Link to={`/${props.value.substring(0, props.value.length - 1) || ''}`} title={props.value}>
         {GetIcon()}
-        {props.value.replace('ava','')}
+        {getShortFolderNameFromFullPath(props.value.replace('ava',''))}
       </Link>
     );
   };

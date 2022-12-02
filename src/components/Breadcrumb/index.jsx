@@ -5,10 +5,10 @@ import withBreadcrumbs from 'react-router-breadcrumbs-hoc';
 
 const BreadcrumbItem = ({ match, breadcrumb }) => {
   const { t } = useTranslation();
-  var title =
+  let title =
     match.url === '/' ? t('homepage') : breadcrumb.props.children.toLowerCase();
-  
-    title = title.replace('ava','');
+
+  title = title.replace('ava','');
  // var uuu = {title};
   return <Link to={match.url}>{title}</Link>;
 };

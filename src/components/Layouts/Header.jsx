@@ -2,8 +2,8 @@ import React, { useEffect, useRef, Fragment } from 'react';
 import { useLocation } from 'react-router';
 import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
-import logo from '../img/vayla_sivussa_fi_sv_rgb.png';
-import logo_en from '../img/logo_en.png';
+import logo from '../../img/vayla_sivussa_fi_sv_rgb.png';
+import logo_en from '../../img/logo_en.png';
 
 const Header = props => {
   const ref = useRef(null);
@@ -18,13 +18,13 @@ const Header = props => {
     <Fragment>
       <div id='top' className='accessibility-shortcuts' ref={ref} tabIndex={-1}>
         {props.children}
-        <a href='#header' className='sr-only sr-only-focusable'>
+        <a href='AVA/src/components/Layouts/Header#header' className='sr-only sr-only-focusable'>
           {t('go_to_header')}
         </a>
-        <a href='#content' className='sr-only sr-only-focusable'>
+        <a href='AVA/src/components/Layouts/Header#content' className='sr-only sr-only-focusable'>
           {t('go_to_content')}
         </a>
-        <a href='#footer' className='sr-only sr-only-focusable'>
+        <a href='AVA/src/components/Layouts/Header#footer' className='sr-only sr-only-focusable'>
           {t('go_to_footer')}
         </a>
       </div>

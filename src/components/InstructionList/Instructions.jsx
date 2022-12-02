@@ -10,10 +10,10 @@ import { AgGridColumn, AgGridReact } from 'ag-grid-react';
 import axios from 'axios';
 import moment from 'moment';
 import { useTranslation } from 'react-i18next';
-import { GetBtnNextAriaLabel } from '../helpers';
-import { config } from '../App';
-import { AG_GRID_LOCALE_FI } from '../locale.fi.js';
-import Header from './Header';
+import { GetBtnNextAriaLabel } from '../../helpers';
+import { config } from '../../App';
+import { AG_GRID_LOCALE_FI } from '../../locale.fi.js';
+import Header from '../Layouts/Header';
 
 const Instructions = () => {
   // state variables
@@ -509,10 +509,10 @@ const Instructions = () => {
         </div>
       ) : null}
       <Header>
-        <a href='#filters' className='sr-only sr-only-focusable'>
+        <a href='AVA/src/components/InstructionList/Instructions#filters' className='sr-only sr-only-focusable'>
           {t('go_to_filters')}
         </a>
-        <a href='#result' className='sr-only sr-only-focusable'>
+        <a href='AVA/src/components/InstructionList/Instructions#result' className='sr-only sr-only-focusable'>
           {t('go_to_search_result')}
         </a>
       </Header>
@@ -829,11 +829,11 @@ const Instructions = () => {
           </button>
         </div>
         <div id="license-rules">
-          <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
+          <a rel="license" href="AVA/src/components/InstructionList/Instructions">
             <img src="https://licensebuttons.net/l/by/4.0/88x31.png" alt="Creative Commons License"/>
           </a>
           <span class="license-rules">
-          {t('license_prefix')} <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">{t('license_postfix')}</a>
+          {t('license_prefix')} <a rel="license" href="AVA/src/components/InstructionList/Instructions">{t('license_postfix')}</a>
           </span>
         </div>
       </div>
