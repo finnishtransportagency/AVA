@@ -1,13 +1,14 @@
 import React, { useRef, useState, useCallback } from 'react';
 import { AgGridColumn, AgGridReact } from 'ag-grid-react';
 import { useTranslation } from 'react-i18next';
-import ClickableCellRenderer from './ClickableCellRenderer';
-import ClickableCellRendererSize from './ClickableCellRendererSize';
-import ClickableCellRendererModified from './ClickableCellRendererModified';
-import { AG_GRID_LOCALE_FI } from '../locale.fi.js';
+import ClickableCellRenderer from '../GridCells/ClickableCellRenderer';
+import ClickableCellRendererSize from '../GridCells/ClickableCellRendererSize';
+import ClickableCellRendererModified from '../GridCells/ClickableCellRendererModified';
+import { AG_GRID_LOCALE_FI } from '../../locale.fi.js';
 import { useParams, withRouter } from 'react-router-dom';
-import { getParentPath, GetBtnNextAriaLabel } from '../helpers';
-import { config } from '../App';
+import { getParentPath, GetBtnNextAriaLabel } from '../../helpers';
+import { config } from '../../App';
+import ClickableCellRendererDownload from "../GridCells/ClickableCellRendererDownload";
 
 const CustomLoadingOverlay = () => {
   const { t } = useTranslation();
@@ -121,9 +122,9 @@ const FoldersList = ({ rowData, fetchError, history, location }) => {
 
   const getNoRowsOverlay = () => {
     return fetchError
-      ? `<a style="pointer-events: auto !important;" href="/">${localeTextFunc(
-          'errorFetching'
-        )}</a>`
+      ? `<a style="pointer-events: auto !important;" href="/AVA/public">${ localeTextFunc(
+        'errorFetching'
+      ) }</a>`
       : `<span>${localeTextFunc('noRowsToShow')}</span>`;
   };
 
@@ -158,10 +159,12 @@ const FoldersList = ({ rowData, fetchError, history, location }) => {
             clickableCellRenderer: ClickableCellRenderer,
             clickableCellRendererModified: ClickableCellRendererModified,
             clickableCellRendererSize: ClickableCellRendererSize,            
+            clickableCellRendererDownload: ClickableCellRendererDownload,
             customLoadingOverlay: CustomLoadingOverlay
           }}
           loadingOverlayComponent={'customLoadingOverlay'}
           overlayNoRowsTemplate={getNoRowsOverlay()}
+          data-cy={`ag_grid_react_main`}
         >
           <AgGridColumn
             flex={1000}
@@ -172,32 +175,49 @@ const FoldersList = ({ rowData, fetchError, history, location }) => {
             lockPinned={true}
             headerName={t('name')}
             field='tiedosto'
+            data-cy={`ag_grid_column_file`}
             cellRenderer='clickableCellRenderer'
             sortable={true}
-          /> 
+          />
           <AgGridColumn
-            flex={300}
-            minWidth={100}
+            flex={200}
+            minWidth={150}
             suppressMovable={false}
             hide={false}
             lockVisible={false}
             lockPinned={false}
             headerName={t('last_modified')}
             field='lastmodified'
+            data-cy={`ag_grid_column_lastmodified`}
             cellRenderer='clickableCellRendererModified'
             sortable={true}
           />         
           <AgGridColumn            
-            flex={200}
-            minWidth={100}
+            flex={120}
+            minWidth={80}
             suppressMovable={false}
             hide={false}
             lockVisible={false}
             lockPinned={false}
             headerName={t('size')}
+            data-cy={`ag_grid_column_size`}
             field='size'
             cellRenderer='clickableCellRendererSize'
             sortable={true}       
+          />
+          <AgGridColumn
+            flex={150}
+            minWidth={100}
+            suppressMovable={false}
+            hide={false}
+            lockVisible={false}
+            lockPinned={false}
+            headerName={t('download_header')}
+            field='download'
+            data-cy={`ag_grid_column_download`}
+            cellRenderer='clickableCellRendererDownload'
+            sortable={false}
+
           />
           
         </AgGridReact>
@@ -213,11 +233,11 @@ const FoldersList = ({ rowData, fetchError, history, location }) => {
         </button>
       </div>
       <div id="license-rules">
-        <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
+        <a rel="license" href="AVA/src/components/Grid/FoldersList">
           <img src="https://licensebuttons.net/l/by/4.0/88x31.png" alt="Creative Commons License"/>
         </a>
         <span className="license-rules">
-        {t('license_prefix')} <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">{t('license_postfix')}</a>
+        {t('license_prefix')} <a rel="license" href="AVA/src/components/Grid/FoldersList">{t('license_postfix')}</a>
         </span>
       </div>
     </div>

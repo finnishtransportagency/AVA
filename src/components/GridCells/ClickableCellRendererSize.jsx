@@ -1,40 +1,18 @@
 import React from 'react';
-import { withRouter, Link, useParams } from 'react-router-dom';
-import { config } from '../App';
-import { useTranslation } from 'react-i18next';
-import { getParentPath } from '../helpers';
+import { withRouter } from 'react-router-dom';
+import { useFoldersData } from "../../hooks/useFoldersData";
 
 const getRightSize = (size) => {
   var sizes = ['B', 'KB', 'MB', 'GB', 'TB'];
+  // eslint-disable-next-line
   if (size == 0) return '0 B';
-  
+
   var i = parseInt(Math.floor(Math.log(size) / Math.log(1024)));
   return Math.round(size / Math.pow(1024, i), 2) + ' ' + sizes[i];
 }
 
 export const Cell = props => {
-  const [indexHTML, setIndexHTML] = React.useState(null);
-  const { t } = useTranslation();
-
-  React.useEffect(() => {
-    fetch(`${config.apiUrlFolders}/${props.value}`)
-      .then(res => res.json())
-      .then(data => {
-        const index = data?.aineisto?.find(row =>
-          row.tiedosto.includes('index.html')
-        );
-
-        if (!index) {
-          return;
-        }
-      
-        fetch(`${config.apiUrlFolders}/${index.tiedosto}`)
-          .then(res => res.json())        
-          .then(data => setIndexHTML(data.url))                
-      });
-  }, [indexHTML, props]);
-
-
+  const indexHTML = useFoldersData(props);
 
   if (indexHTML !== null) {
     return (
@@ -50,13 +28,8 @@ export const Cell = props => {
 
 
 const ClickableCellRendererSize = props => {
-  const { folder } = useParams();
 
-
-  
   const GetLink = () => {
-    const { t } = useTranslation();
-    const parentPath = getParentPath(folder);
 
     if (props.value === 'BackToParent') {
       return ('');

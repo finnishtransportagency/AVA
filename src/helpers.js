@@ -24,3 +24,4 @@ export const GetBtnNextAriaLabel = (pageSize, totalRows) => {
         `. ${t('show_more')}. `
     : `${t('show_more')}. `;
 };
+
