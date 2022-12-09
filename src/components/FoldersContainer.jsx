@@ -1,86 +1,51 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment } from 'react';
 import { useParams, withRouter } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import FoldersList from './Grid/FoldersList';
-import { config } from '../App';
 import Header from './Layouts/Header';
 import Breadcrumb from './Breadcrumb';
+import { useTitle } from "../hooks/useTitle";
+import { useGridRowData } from "../hooks/useGridRowData";
 
 const FoldersContainer = () => {
   let { folder } = useParams();
-  const [rowData, setRowData] = useState(null);
-  const [fetchError, setFetchError] = useState(false);
   const { t } = useTranslation();
-  const [title, setTitle] = useState('');
-
-  useEffect(() => {
-    fetch(`${config.apiUrlFolders}${folder || config.defaultFolder}/`)
-      .then(res => {
-        if (!res.ok) {
-          throw Error(res.statusText);
-        }
-        return res.json();
-      })
-      .then(jsonRes => {
-        if (jsonRes.aineisto) {
-          setRowData(jsonRes.aineisto);
-        } else {
-          throw Error('Malformed response');
-        }
-      })
-      .catch(error => {
-        console.log(error);
-        setFetchError(true);
-        setRowData([]);
-      });
-  }, [folder, t]);
-
-  // TODO refactor title creation to new custom hook
-  useEffect(() => {
-    let title = `${ folder ?? t('heading') }`;
-    if(title === 'ava') {
-      title = `${t('heading')}`;
-    }
-    title = title.replace('ava','');
-
-    document.title = title;
-    setTitle(title);
-  }, [folder, t]);
-
+  const title = useTitle(folder);
+  const { rowData, fetchError } = useGridRowData(folder);
 
   return (
     <Fragment>
-      <Header />
+      <Header/>
       <div className='page-wrapper'>
         <div className='content-area'>
           <h1 tabIndex='-1' id='content'>
-            {title}
+            { title }
           </h1>
           <p tabIndex='-1'>
-            {t('about_open_data')}:{' '}
+            { t('about_open_data') }:{ ' ' }
             <a
               tabIndex='0'
               href='http://vayla.fi/avoindata'
               target='_blank'
               rel='noreferrer'
             >
-              {t('about_open_data_url')}
+              { t('about_open_data_url') }
             </a>
           </p>
           <p tabIndex='-1'>
-            {t('about_open_contact_text')}:{' '}
+            { t('about_open_contact_text') }:{ ' ' }
             <a
               tabIndex='0'
-              href={`mailto:${t('about_open_contact_email')}`}
+              href={ `mailto:${ t('about_open_contact_email') }` }
               rel='noreferrer'
             >
-              {t('about_open_contact_email')}
+              { t('about_open_contact_email') }
             </a>
           </p>
         </div>
-        <Breadcrumb />
+        <Breadcrumb/>
       </div>
-      <FoldersList rowData={rowData} fetchError={fetchError} />
+      <FoldersList rowData={ rowData } fetchError={ fetchError }/>
     </Fragment>
   );
 };
