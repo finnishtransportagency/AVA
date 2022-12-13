@@ -4,11 +4,12 @@ import { useTranslation } from 'react-i18next';
 import ClickableCellRenderer from '../GridCells/ClickableCellRenderer';
 import ClickableCellRendererSize from '../GridCells/ClickableCellRendererSize';
 import ClickableCellRendererModified from '../GridCells/ClickableCellRendererModified';
-import { AG_GRID_LOCALE_FI } from '../../locale.fi.js';
+import { AG_GRID_LOCALE_FI } from '../../locale/locale.fi.js';
 import { useParams, withRouter } from 'react-router-dom';
-import { getParentPath, GetBtnNextAriaLabel } from '../../helpers';
 import { config } from '../../App';
 import ClickableCellRendererDownload from "../GridCells/ClickableCellRendererDownload";
+import { getParentPath } from "../../service/FilePathService";
+import { GetBtnNextAriaLabel } from "../../service/AriaLabelService";
 
 const CustomLoadingOverlay = () => {
   const { t } = useTranslation();

@@ -1,9 +1,12 @@
 import React from 'react';
 import { Link, useParams, withRouter } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { getParentPath } from '../../helpers';
 import { useFoldersData } from "../../hooks/useFoldersData";
-import { getShortFileNameFromFullPath, getShortFolderNameFromFullPath } from "../../service/FileNameService";
+import {
+  getParentPath,
+  getShortFileNameFromFullPath,
+  getShortFolderNameFromFullPath
+} from "../../service/FilePathService";
 import { fetchUrlAndOpenToNewTab } from "../../service/FileDownloadService";
 import { getBackButtonOrFolderOrFileIcon } from "../Icon/GetFolderOrFileIcon";
 

@@ -20,3 +20,16 @@ export const getShortFolderNameFromFullPath = folderPath => {
   }
   return backUrl;
 };
+
+export const getParentPath = pathParams => {
+  let backUrl = null;
+  if (pathParams) {
+    const paths = pathParams.split(/\//g);
+    if (paths.length > 1) {
+      backUrl = '/' + paths.slice(0, paths.length - 1).join('/');
+    } else {
+      backUrl = '/';
+    }
+  }
+  return backUrl;
+};
