@@ -1,10 +1,11 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { getShortFileNameFromFullPath } from "../../service/FileNameService";
+import { getShortFileNameFromFullPath } from "../../service/FilePathService";
 import { getCurrentUrl } from "../../service/UrlService";
 import PropTypes from 'prop-types';
 import { useFoldersData } from "../../hooks/useFoldersData";
+import { isDev } from "../../service/EnvService";
 
 function isRootFolderOrBackButton(isFolder, fileName) {
   return isFolder || fileName === 'BackToParent';
@@ -25,8 +26,14 @@ const getDownloadButton = (params, t) => {
   if (fileName !== '') {
     shortFileName = getShortFileNameFromFullPath(fileName);
   }
+  let prefixPath = ''
 
-  let fileHref = `${getCurrentUrl()}/${fileName}`
+  if (isDev()) {
+     // public/data/*
+     prefixPath = '/data'
+  }
+
+  let fileHref = `${getCurrentUrl()}${prefixPath}/${fileName}`;
 
   return <a href={ fileHref} download={shortFileName}> {t('download_file')} </a>;
 }
