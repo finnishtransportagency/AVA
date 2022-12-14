@@ -55,3 +55,8 @@ CI flow->
    1. `REACT_APP_FOLDERS_URL="value" npx react-inject-env set`
    2.  To add multiple values on same line `REACT_APP_FOLDERS_URL="value" REACT_APP_FOLDERS_URL_2="value2" && npx react-inject-env set`
 4. Upload all files to S3 bucket to be hosted.
+
+
+
+## Other quirks
+For the time being GitHub Action uses 3rd party action to automatically bump the version number of the release. Make sure that there are no tags created by you starting with characters "v.", since that might cause some issues with the 3rd party action. No biggie, just remove those tags that have been manually created which are interfering with the 3rd party action and it should work. 
