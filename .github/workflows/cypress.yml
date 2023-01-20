@@ -10,8 +10,8 @@ jobs:
       # and run all Cypress tests
       - uses: cypress-io/github-action@v5 # use the explicit version number
         with:
-          build: return 0
-          start: return 0
+          build: npm run build:test
+          start: npm run start
       # after the test run completes
       # store videos and any screenshots
       # NOTE: screenshots will be generated only if E2E test failed
