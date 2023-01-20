@@ -18,7 +18,7 @@ export const Cell = props => {
   //if (indexHTML !== null) {
   if (indexHTML !== null && indexHTML.includes(props.value + 'index.htm')) {
     return (
-      <a href={ indexHTML } target='_blank' rel='noreferrer' data-cy={'file-link-html'}>
+      <a href={ indexHTML } target='_blank' rel='noreferrer'>
         <i
           className='fas fa-file ava-list-icon'
           role='img'
