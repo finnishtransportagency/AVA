@@ -1,6 +1,6 @@
 describe('ava/Hanketiedot/Paikkatieto', () => {
   it('Navigation works to ava/Hanketiedot/Paikkatieto and back to /ava  ', () => {
-    cy.visit('https://avatest.testivaylapilvi.fi/')
+    cy.visit('http://localhost:3000/')
 
     let waitTimeout = 500;
 

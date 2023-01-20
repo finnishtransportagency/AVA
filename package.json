@@ -29,6 +29,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "build": "dotenv -e .env.test -- react-scripts build",
     "build:test": "dotenv -e .env.test -- react-scripts build",
     "build:prod": "dotenv -e .env.production -- react-scripts build",
     "test": "react-scripts test",
