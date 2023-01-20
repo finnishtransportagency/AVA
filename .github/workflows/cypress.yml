@@ -3,7 +3,7 @@ on: [push]
 jobs:
   cypress-run:
     runs-on: ubuntu-22.04
-    name: Artifacts
+    name: 'Builds and tests avatest.testivaylapilvi.fi'
     steps:
       - uses: actions/checkout@v3
       # Install NPM dependencies, cache them correctly
