@@ -9,6 +9,10 @@ jobs:
       # Install NPM dependencies, cache them correctly
       # and run all Cypress tests
       - uses: cypress-io/github-action@v5 # use the explicit version number
+        env:
+          REACT_APP_FOLDERS_URL: https://apiavatest.testivaylapilvi.fi/v2/ava/hakemisto/
+          REACT_APP_INST_URL: https://apiavatest.testivaylapilvi.fi/ava/ohjeluettelo
+          REACT_APP_S3_OHJEET_ENDPOINT: https://avatest.testivaylapilvi.fi/ava/Ohjeluettelo/
         with:
           build: npm run build:test
           start: npm run start
