@@ -165,7 +165,6 @@ const FoldersList = ({ rowData, fetchError, history, location }) => {
           }}
           loadingOverlayComponent={'customLoadingOverlay'}
           overlayNoRowsTemplate={getNoRowsOverlay()}
-          data-cy={`ag_grid_react_main`}
         >
           <AgGridColumn
             flex={1000}
@@ -176,7 +175,6 @@ const FoldersList = ({ rowData, fetchError, history, location }) => {
             lockPinned={true}
             headerName={t('name')}
             field='tiedosto'
-            data-cy={`ag_grid_column_file`}
             cellRenderer='clickableCellRenderer'
             sortable={true}
           />
@@ -189,7 +187,6 @@ const FoldersList = ({ rowData, fetchError, history, location }) => {
             lockPinned={false}
             headerName={t('last_modified')}
             field='lastmodified'
-            data-cy={`ag_grid_column_lastmodified`}
             cellRenderer='clickableCellRendererModified'
             sortable={true}
           />         
@@ -201,7 +198,6 @@ const FoldersList = ({ rowData, fetchError, history, location }) => {
             lockVisible={false}
             lockPinned={false}
             headerName={t('size')}
-            data-cy={`ag_grid_column_size`}
             field='size'
             cellRenderer='clickableCellRendererSize'
             sortable={true}       
@@ -215,7 +211,6 @@ const FoldersList = ({ rowData, fetchError, history, location }) => {
             lockPinned={false}
             headerName={t('download_header')}
             field='download'
-            data-cy={`ag_grid_column_download`}
             cellRenderer='clickableCellRendererDownload'
             sortable={false}
 
