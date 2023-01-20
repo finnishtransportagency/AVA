@@ -9,6 +9,7 @@ export const getBackButtonOrFolderOrFileIcon = (value, isDir) => {
       <i
         className='fas fa-folder-open ava-list-icon'
         role='img'
+        data-cy={'folder-link'}
         aria-label={ i18n.t('folder') }
       />
     );

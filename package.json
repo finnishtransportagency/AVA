@@ -32,7 +32,11 @@
     "build:test": "dotenv -e .env.test -- react-scripts build",
     "build:prod": "dotenv -e .env.production -- react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "cy:e2e": "cypress run --spec \"cypress/e2e/**.cy.js\"",
+    "cy:e2e-m": "cypress run --spec \"cypress/integration/mock-e2e/**.cy.js\""
   },
   "eslintConfig": {
     "extends": [
@@ -53,6 +57,9 @@
     ]
   },
   "devDependencies": {
+    "add": "^2.0.6",
+    "cypress": "^12.3.0",
+    "cypress-ag-grid": "^2.0.2",
     "prop-types": "^15.8.1",
     "react-inject-env": "^2.1.0"
   }
