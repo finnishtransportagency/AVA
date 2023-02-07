@@ -1,6 +1,6 @@
 describe('ava/Hanketiedot/Paikkatieto', () => {
   it('Navigation works to ava/Hanketiedot/Paikkatieto and back to /ava  ', () => {
-    cy.visit('http://localhost:3000/')
+    cy.visit('/')
 
     let waitTimeout = 500;
 
