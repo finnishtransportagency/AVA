@@ -8,12 +8,10 @@ on:
     branches:
       - 'master'
 permissions:
-    contents: read
+    contents: write
 jobs:
   build:
     runs-on: ubuntu-latest
-    outputs:
-      release_tag_output: ${{ steps.get-tag-step.outputs.release_tag }}
     steps:
     - name: Checkout
       uses: actions/checkout@v3
@@ -42,18 +40,10 @@ jobs:
         default_bump_level: patch # will bump patch level if PR has no labels (bump:minor, bump:major)
 
     - name: Get the tag
-      id: get-tag-step
       if: always() # run this even if tests fail
       run: |
         echo "RELEASE_TAG=$(git tag --points-at HEAD)" >> $GITHUB_ENV
-        echo "release_tag=$(git tag --points-at HEAD)" >> $GITHUB_OUTPUT
-        
-  release:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    needs: build
-    steps:
+
     - name: "Create release"
       id: release-step
       if: always() # run this even if tests fail
@@ -65,13 +55,13 @@ jobs:
             const result = await github.rest.repos.createRelease({
               draft: false,
               generate_release_notes: true,
-              name: ${{needs.build.outputs.release_tag_output}}, //process.env.RELEASE_TAG,
+              name: process.env.RELEASE_TAG,
               owner: context.repo.owner,
               prerelease: false,
               repo: context.repo.repo,
               tag_name: process.env.RELEASE_TAG,
             });
-
+            
             console.log(result);
             return result.data.upload_url.replace("{?name,label}", "?name=ava.zip");
           } catch (error) {
