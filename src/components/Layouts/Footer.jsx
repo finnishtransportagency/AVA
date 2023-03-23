@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import i18n from 'i18next';
 import logo from '../../img/vayla_alla_fi_sv_rgb.png';
 import logo_en from '../../img/vaylavirasto-logo_en_rgb.png';
+import { config } from "../../App";
 
 const Footer = () => {
   const scrollTop = useRef(null);
@@ -210,6 +211,13 @@ const Footer = () => {
                   {t('social_media')}
                 </a>{' '}
                 <br />
+                {
+                  config.codeVersion !== "" ?
+                    <p tabIndex='-1'>
+                      { config.codeVersion }
+                    </p>
+                    : null
+                }
               </div>
             </div>
           </div>
