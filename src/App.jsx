@@ -19,7 +19,8 @@ export const config = {
     'https://devapi.testivaylapilvi.fi/ava/ohjeluettelo',
   instructionsBaseUrl: 
     env.REACT_APP_S3_OHJEET_ENDPOINT ||
-    'https://d3dqafoph52mqj.cloudfront.net/ava/Ohjeluettelo/'
+    'https://d3dqafoph52mqj.cloudfront.net/ava/Ohjeluettelo/',
+  codeVersion: env.REACT_APP_CODE_VERSION || ''
 };
 
 
