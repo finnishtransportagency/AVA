@@ -23,8 +23,8 @@ export const fetchUrlAndOpenToNewTab = (fileName) => {
             return window.open(fixedUrl, '_blank');
         }
 
-        const newUrl = new URL(fixedUrl).pathname;
-        return window.open(`${getCurrentUrl()}${newUrl}`, '_blank');
+        const pathname = new URL(fixedUrl).pathname;
+        return window.open(`${getCurrentUrl()}${pathname}`, '_blank');
       }
 
       window.location.assign(url);
