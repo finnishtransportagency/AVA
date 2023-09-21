@@ -1,4 +1,6 @@
 import { config } from "../App";
+import { getCurrentUrl } from "./UrlService";
+import {isDev} from "./EnvService";
 
 // get URL and retrieve asset from S3
 // TODO: how is the link delivered?
@@ -15,8 +17,14 @@ export const fetchUrlAndOpenToNewTab = (fileName) => {
       // Dirty fix until the backend is fixed
       if (!url.split('/ava/').length - 1) {
         const fixedUrl = url.replace('ava/', '/ava/');
-        //return window.location.assign(fixedUrl);
-        return window.open(fixedUrl, '_blank');
+        // For local development purposes fetch URL from config.apiUrlFolders
+        if (isDev()) {
+            //return window.location.assign(fixedUrl);
+            return window.open(fixedUrl, '_blank');
+        }
+
+        const pathname = new URL(fixedUrl).pathname;
+        return window.open(`${getCurrentUrl()}${pathname}`, '_blank');
       }
 
       window.location.assign(url);

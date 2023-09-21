@@ -62,6 +62,10 @@
     "cypress": "^12.3.0",
     "cypress-ag-grid": "^2.0.2",
     "prop-types": "^15.8.1",
-    "react-inject-env": "^2.1.0"
+    "react-inject-env": "^2.1.0",
+    "@types/jest": "^29.2.4",
+    "babel-jest": "^29.3.1",
+    "jest": "^29.3.1",
+    "ts-jest": "^29.0.3"
   }
 }
