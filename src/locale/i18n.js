@@ -8,6 +8,7 @@ const resources = {
       loading_content: 'Ladataan sisältöä...',
       download_file: 'Lataa',
       download_header: 'Lataa',
+      tags_header: 'Tägit',
       showing: 'Näytetään',
       name: 'Nimi',
       last_modified: 'Viimeksi muokattu',
@@ -74,6 +75,7 @@ const resources = {
     translation: {
       heading: 'Finnish Transport Infrastructure Agency - Forwarding service for open data',
       loading_content: 'Loading content...',
+      tags_header: 'Tags',
       showing: 'Showing',
       name: 'Name',
       last_modified: 'Last modified',
@@ -143,6 +145,7 @@ const resources = {
     translation: {
       heading: 'Trafikledsverket - Förmedlingstjänst för öppna data',
       loading_content: 'Innehållet laddas',
+      tags_header: 'Taggar',
       showing: 'Som visar',
       name: 'Namn',
       last_modified: 'Senast ändrad',

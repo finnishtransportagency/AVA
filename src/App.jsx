@@ -5,21 +5,25 @@ import FoldersContainer from './components/FoldersContainer';
 import Instructions from './components/InstructionList/Instructions';
 import './App.scss';
 import { env } from './env'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const config = {
   defaultFolder: 'ava',
   //defaultFolder: '',
   apiUrlFolders:
     env.REACT_APP_FOLDERS_URL ||
-    'https://ij1cvn8w2k.execute-api.eu-west-1.amazonaws.com/dev/tiedostot/', // dev-mock
+    'https://apiavatest.testivaylapilvi.fi/v2/ava/hakemisto/', // dev-mock
+  tagsApiUrl:
+    env.REACT_APP_TAGS_URL || '',
   rowsPerPage: 30,
   mobileMaxClientWidth: 1400,
   apiUrlInstructions:
     env.REACT_APP_INST_URL ||
-    'https://devapi.testivaylapilvi.fi/ava/ohjeluettelo',
+    'https://apiavatest.testivaylapilvi.fi/v2/ava/ohjeluettelo',
   instructionsBaseUrl: 
     env.REACT_APP_S3_OHJEET_ENDPOINT ||
-    'https://d3dqafoph52mqj.cloudfront.net/ava/Ohjeluettelo/',
+    'https://apiavatest.testivaylapilvi.fi/v2/ava/ava/Ohjeluettelo/',
   codeVersion: env.REACT_APP_CODE_VERSION || ''
 };
 
@@ -35,6 +39,7 @@ const App = () => {
           <FoldersContainer />
         </Route>
       </Switch>
+      <ToastContainer />
       <Footer />
     </Router>
   );

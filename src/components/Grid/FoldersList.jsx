@@ -10,6 +10,7 @@ import { config } from '../../App';
 import ClickableCellRendererDownload from "../GridCells/ClickableCellRendererDownload";
 import { getParentPath } from "../../service/FilePathService";
 import { GetBtnNextAriaLabel } from "../../service/AriaLabelService";
+import ClickableCellRendererTags from "../GridCells/ClickableCellRendererTags";
 
 const CustomLoadingOverlay = () => {
   const { t } = useTranslation();
@@ -159,6 +160,7 @@ const FoldersList = ({ rowData, fetchError, history, location }) => {
           frameworkComponents={{
             clickableCellRenderer: ClickableCellRenderer,
             clickableCellRendererModified: ClickableCellRendererModified,
+            clickableCellRendererTags: ClickableCellRendererTags,
             clickableCellRendererSize: ClickableCellRendererSize,            
             clickableCellRendererDownload: ClickableCellRendererDownload,
             customLoadingOverlay: CustomLoadingOverlay
@@ -177,6 +179,19 @@ const FoldersList = ({ rowData, fetchError, history, location }) => {
             field='tiedosto'
             cellRenderer='clickableCellRenderer'
             sortable={true}
+          />
+          <AgGridColumn
+              flex={ 150 }
+              minWidth={ 100 }
+              suppressMovable={ false }
+              hide={ false }
+              lockVisible={ false }
+              lockPinned={ false }
+              headerName={ t('tags_header') }
+              field='tags'
+              cellRenderer='clickableCellRendererTags'
+              sortable={ true }
+              resizable={ true}
           />
           <AgGridColumn
             flex={200}
