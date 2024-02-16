@@ -52,12 +52,10 @@ const ClickableCellRenderer = props => {
         </Link>
       );
     } else if (isInstructionsFolder(props)) {
-      // if folder name is 'Ohjeluettelo', navigate to ohjeluettelo
+      // if folder name is 'Ohjeluettelo', hide it from the path
       return (
-        <Link to='/ava/Ohjeluettelo' title={ props.value }>
-          { getBackButtonOrFolderOrFileIcon(props.value, props.data.onkohakemisto) }
-          { props.value.replace('ava', '') }
-        </Link>
+        <>
+        </>
       );
     } else if (!props.data.onkohakemisto) {
       return (
