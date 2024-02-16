@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Footer from './components/Layouts/Footer';
 import FoldersContainer from './components/FoldersContainer';
-import Instructions from './components/InstructionList/Instructions';
+import Instructions from './components/notUsed/InstructionList/Instructions';
 import './App.scss';
 import { env } from './env'
 import { ToastContainer } from 'react-toastify';
@@ -32,9 +32,6 @@ const App = () => {
   return (
     <Router>
       <Switch>
-        <Route exact path='/ava/Ohjeluettelo'>
-          <Instructions />
-        </Route>
         <Route path='/:folder*/'>
           <FoldersContainer />
         </Route>

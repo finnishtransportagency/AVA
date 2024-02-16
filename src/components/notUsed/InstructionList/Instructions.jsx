@@ -10,10 +10,10 @@ import { AgGridColumn, AgGridReact } from 'ag-grid-react';
 import axios from 'axios';
 import moment from 'moment';
 import { useTranslation } from 'react-i18next';
-import { config } from '../../App';
-import { AG_GRID_LOCALE_FI } from '../../locale/locale.fi.js';
-import Header from '../Layouts/Header';
-import { GetBtnNextAriaLabel } from "../../service/AriaLabelService";
+import { config } from '../../../App';
+import { AG_GRID_LOCALE_FI } from '../../../locale/locale.fi.js';
+import Header from '../../Layouts/Header';
+import { GetBtnNextAriaLabel } from "../../../service/AriaLabelService";
 
 const Instructions = () => {
   // state variables
