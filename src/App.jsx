@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Footer from './components/Layouts/Footer';
 import FoldersContainer from './components/FoldersContainer';
-import Instructions from './components/notUsed/InstructionList/Instructions';
 import './App.scss';
 import { env } from './env'
 import { ToastContainer } from 'react-toastify';
