@@ -4,7 +4,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## How to develop locally
 
-
 Prerequisites:
 - [Node.js](https://nodejs.org/en/) v14.15.1 or greater
 - [yarn](https://yarnpkg.com/) package manager
