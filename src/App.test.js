@@ -13,7 +13,7 @@ test('renders contact information on fi language', () => {
   render(<App />);
   const linkElement = screen.getByText(/Yhteystiedot/i);
   expect(linkElement).toBeInTheDocument();
-  expect(linkElement).toHaveTextContent(/ptptuki@sitowise.com/i);
+  expect(linkElement).toHaveTextContent(/paikkatieto@vayla.fi/i);
 });
 
 test('renders contact information on sv language', () => {
@@ -21,7 +21,7 @@ test('renders contact information on sv language', () => {
   render(<App />);
   const linkElement = screen.getByText(/Kontaktinformation/i);
   expect(linkElement).toBeInTheDocument();
-  expect(linkElement).toHaveTextContent(/ptptuki@sitowise.com/i);
+  expect(linkElement).toHaveTextContent(/paikkatieto@vayla.fi/i);
 });
 
 
@@ -30,5 +30,5 @@ test('renders contact information on en language', () => {
   render(<App />);
   const linkElement = screen.getAllByText(/Contact information/i)[0];
   expect(linkElement).toBeInTheDocument();
-  expect(linkElement).toHaveTextContent(/ptptuki@sitowise.com/i);
+  expect(linkElement).toHaveTextContent(/paikkatieto@vayla.fi/i);
 });
