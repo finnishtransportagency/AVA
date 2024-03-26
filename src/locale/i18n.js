@@ -64,7 +64,7 @@ const resources = {
       about_open_data: 'Lisätietoja avoimesta datasta',
       about_open_data_url: 'http://vayla.fi/avoindata',
       about_open_contact_text: 'Yhteystiedot',
-      about_open_contact_email: 'aineistonvalitys@vayla.fi',
+      about_open_contact_email: 'ptptuki@sitowise.com',
       back: 'Takaisin',
       folder: 'Hakemisto',
       license_prefix: 'Tämä teos on lisensoitu',
@@ -134,7 +134,7 @@ const resources = {
       about_open_data_url:
         'https://vayla.fi/en/transport-network/data/open-data',
       about_open_contact_text: 'Contact information',
-      about_open_contact_email: 'aineistonvalitys@vayla.fi',
+      about_open_contact_email: 'ptptuki@sitowise.com',
       back: 'Go back',
       folder: 'Folder',
       license_prefix: 'This work is licensed under a',
@@ -204,7 +204,7 @@ const resources = {
       about_open_data_url:
         'https://vayla.fi/sv/trafikleder/material/oppna-data',
       about_open_contact_text: 'Kontaktinformation',
-      about_open_contact_email: 'aineistonvalitys@vayla.fi',
+      about_open_contact_email: 'ptptuki@sitowise.com',
       back: 'Gå tillbaka',
       folder: 'Mapp',
       license_prefix: 'Detta verk är licensierat under en',
