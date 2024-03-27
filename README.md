@@ -14,6 +14,7 @@ Go to the project root and install dependencies
 yarn install
 ```
 
+
 Start the development server
 ```bash
 yarn start
